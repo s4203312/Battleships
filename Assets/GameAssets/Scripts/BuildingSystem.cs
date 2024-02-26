@@ -1,23 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
 
 public class BuildingSystem : MonoBehaviour
 {
     public static BuildingSystem current;
 
+    //Grid Variables
     public GridLayout gridLayout;
     private Grid grid;
     [SerializeField] private Tilemap mainTilemap;
     [SerializeField] private TileBase whiteTile;
 
-    public GameObject ship1;
-
     private PlaceableObject objectToPlace;
+    public GameObject shipSpawnPoint;
 
+    //Variables for UI
+    public GameObject buildingPanel;
+    public GameObject editingPanel;
 
 
     private void Awake()
@@ -26,40 +27,42 @@ public class BuildingSystem : MonoBehaviour
         grid = gridLayout.gameObject.GetComponent<Grid>();
     }
 
-    
-    void Update()
+    //Button functions for editing options in build mode 
+    public void BeginPlaceShip(GameObject shipPrefab)
     {
-        if(Input.GetKeyUp(KeyCode.B))
+        InitializeWithObject(shipPrefab);
+        buildingPanel.SetActive(false);
+        editingPanel.SetActive(true);
+    }
+    public void ConfirmPlaceShip()
+    {
+        if (CanBePlaced(objectToPlace))
         {
-            InitializeWithObject(ship1);
+            objectToPlace.Place();
+            Vector3Int start = gridLayout.WorldToCell(objectToPlace.GetStartPosition());
+            TakeArea(start, objectToPlace.Size);
         }
-
-        if (!objectToPlace)
-        {
-            return;
-        }
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (CanBePlaced(objectToPlace))
-            {
-                objectToPlace.Place();
-                Vector3Int start = gridLayout.WorldToCell(objectToPlace.GetStartPosition());
-                TakeArea(start, objectToPlace.Size);
-            }
-            else
-            {
-                Destroy(objectToPlace.gameObject);
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.R))
-        {
-            objectToPlace.Rotate();
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape))
+        else
         {
             Destroy(objectToPlace.gameObject);
         }
+        buildingPanel.SetActive(true);
+        editingPanel.SetActive(false);
     }
+    public void RotatePlaceShip()
+    {
+        objectToPlace.Rotate();
+    }
+    public void CancelPlaceShip()
+    {
+        Destroy(objectToPlace.gameObject);
+        buildingPanel.SetActive(true);
+        editingPanel.SetActive(false);
+    }
+
+
+
+
 
     public static Vector3 GetMouseWorldPosition()
     {
@@ -81,11 +84,9 @@ public class BuildingSystem : MonoBehaviour
         return position;
     }
 
-
-
     public void InitializeWithObject(GameObject ship)
     {
-        Vector3 position = SnapCoordinateToGrid(Vector3.zero);
+        Vector3 position = SnapCoordinateToGrid(shipSpawnPoint.transform.position);
 
         GameObject shipObject = Instantiate(ship, position, Quaternion.identity);
         objectToPlace = shipObject.GetComponent<PlaceableObject>();
