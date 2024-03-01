@@ -19,6 +19,9 @@ public class BuildingSystem : MonoBehaviour
     //Variables for UI
     public GameObject buildingPanel;
     public GameObject editingPanel;
+    public GameObject arrowPanel;
+
+    public GameObject currentShip;
 
 
     private void Awake()
@@ -27,12 +30,14 @@ public class BuildingSystem : MonoBehaviour
         grid = gridLayout.gameObject.GetComponent<Grid>();
     }
 
-    //Button functions for editing options in build mode 
+    //Button functions for editing options in build mode ******Old******
     public void BeginPlaceShip(GameObject shipPrefab)
     {
         InitializeWithObject(shipPrefab);
         buildingPanel.SetActive(false);
         editingPanel.SetActive(true);
+
+        arrowPanel.SetActive(true);
     }
     public void ConfirmPlaceShip()
     {
@@ -48,6 +53,7 @@ public class BuildingSystem : MonoBehaviour
         }
         buildingPanel.SetActive(true);
         editingPanel.SetActive(false);
+        arrowPanel.SetActive(false);
     }
     public void RotatePlaceShip()
     {
@@ -58,7 +64,32 @@ public class BuildingSystem : MonoBehaviour
         Destroy(objectToPlace.gameObject);
         buildingPanel.SetActive(true);
         editingPanel.SetActive(false);
+
+
+        arrowPanel.SetActive(false);
     }
+
+
+    //Arrow Method
+
+    public void MoveLeft()
+    {
+        currentShip.transform.position = currentShip.transform.position + new Vector3(-10, 0, 0);
+    }
+    public void MoveRight()
+    {
+        currentShip.transform.position = currentShip.transform.position + new Vector3(10, 0, 0);
+    }
+    public void MoveUp()
+    {
+        currentShip.transform.position = currentShip.transform.position + new Vector3(0, 0, 10);
+    }
+    public void MoveDown()
+    {
+        currentShip.transform.position = currentShip.transform.position + new Vector3(0, 0, -10);
+    }
+
+
 
 
 
@@ -88,9 +119,9 @@ public class BuildingSystem : MonoBehaviour
     {
         Vector3 position = SnapCoordinateToGrid(shipSpawnPoint.transform.position);
 
-        GameObject shipObject = Instantiate(ship, position, Quaternion.identity);
-        objectToPlace = shipObject.GetComponent<PlaceableObject>();
-        shipObject.AddComponent<ObjectDrag>();
+        currentShip = Instantiate(ship, position, Quaternion.identity);
+        objectToPlace = currentShip.GetComponent<PlaceableObject>();
+        currentShip.AddComponent<ObjectDrag>();
     }
 
     private static TileBase[] GetTileBlock(BoundsInt area, Tilemap tilemap)
