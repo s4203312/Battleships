@@ -22,6 +22,7 @@ public class BuildingSystem : MonoBehaviour
     public GameObject arrowPanel;
 
     public GameObject currentShip;
+    public Transform previousPos;
 
 
     private void Awake()
@@ -74,24 +75,24 @@ public class BuildingSystem : MonoBehaviour
 
     public void MoveLeft()
     {
+        previousPos = currentShip.transform;
         currentShip.transform.position = currentShip.transform.position + new Vector3(-10, 0, 0);
     }
     public void MoveRight()
     {
+        previousPos = currentShip.transform;
         currentShip.transform.position = currentShip.transform.position + new Vector3(10, 0, 0);
     }
     public void MoveUp()
     {
+        previousPos = currentShip.transform;
         currentShip.transform.position = currentShip.transform.position + new Vector3(0, 0, 10);
     }
     public void MoveDown()
     {
+        previousPos = currentShip.transform;
         currentShip.transform.position = currentShip.transform.position + new Vector3(0, 0, -10);
     }
-
-
-
-
 
 
 
