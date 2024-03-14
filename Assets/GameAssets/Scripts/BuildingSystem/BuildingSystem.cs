@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class BuildingSystem : MonoBehaviour
 {
@@ -25,10 +28,22 @@ public class BuildingSystem : MonoBehaviour
     public Transform previousPos;
 
 
+    //Saving ship pos variables
+    public Dictionary<string, Vector3> allTiles = new Dictionary<string, Vector3>();
+    public Vector3[] shipTiles;
+    public Dictionary<string, Vector3[]> allShipPos;
+
+
     private void Awake()
     {
         current = this;
         grid = gridLayout.gameObject.GetComponent<Grid>();
+
+        CreateAllPos();
+        //foreach (var item in allTiles)
+        //{
+        //    Debug.Log("Key " + item.Key + " Value " + item.Value);
+        //}
     }
 
     //Button functions for editing options in build mode ******Old******
@@ -75,24 +90,110 @@ public class BuildingSystem : MonoBehaviour
 
     public void MoveLeft()
     {
-        previousPos = currentShip.transform;
-        currentShip.transform.position = currentShip.transform.position + new Vector3(-10, 0, 0);
+        int counter = BoundsCheck(1);
+        if (counter == 1)
+        {
+            previousPos = currentShip.transform;
+            currentShip.transform.position = currentShip.transform.position + new Vector3(-10, 0, 0);
+        }
     }
     public void MoveRight()
     {
-        previousPos = currentShip.transform;
-        currentShip.transform.position = currentShip.transform.position + new Vector3(10, 0, 0);
+        int counter = BoundsCheck(2);
+        if (counter == 1)
+        {
+            previousPos = currentShip.transform;
+            currentShip.transform.position = currentShip.transform.position + new Vector3(10, 0, 0);
+        }
     }
     public void MoveUp()
     {
-        previousPos = currentShip.transform;
-        currentShip.transform.position = currentShip.transform.position + new Vector3(0, 0, 10);
+        int counter = BoundsCheck(3);
+        if (counter == 1)
+        {
+            previousPos = currentShip.transform;
+            currentShip.transform.position = currentShip.transform.position + new Vector3(0, 0, 10);
+        }
     }
     public void MoveDown()
     {
-        previousPos = currentShip.transform;
-        currentShip.transform.position = currentShip.transform.position + new Vector3(0, 0, -10);
+        int counter = BoundsCheck(4);
+        if (counter == 1)
+        {
+            previousPos = currentShip.transform;
+            currentShip.transform.position = currentShip.transform.position + new Vector3(0, 0, -10);
+        }
     }
+
+    //1,2 are left and right. 3,4 are up and down
+    public int BoundsCheck(int direction)
+    {
+        int counter = 0;
+        Vector3 inBoundsVec = new Vector3(0, 0, 0) + currentShip.transform.position;
+
+        if (direction == 1)
+        {
+            if (inBoundsVec[0] >= 0f) //Check on X value
+            {
+                counter++;
+            }
+        }
+        if (direction == 2)
+        {
+            if (inBoundsVec[0] <= 100f) //Check on X value
+            {
+                counter++;
+            }
+        }
+        if (direction == 3)
+        {
+            if (inBoundsVec[2] <= 100f) //Check on Z value
+            {
+                counter++;
+            }
+        }
+        if (direction == 4)
+        {
+            if (inBoundsVec[2] >= 0f) //Check on Z value
+            {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    public void CreateAllPos()
+    {
+        char columnLetter = 'A';
+        int columnNumber = 1;
+
+        float xVal = 0;
+        float zVal = 40;
+
+        for (int i = 0; i < 25; i++)            //A1 through to E5. 25 values
+        {
+            Vector3 cornerPos = new Vector3(xVal, 0, zVal);
+            allTiles.Add(columnLetter + (columnNumber.ToString()), cornerPos);
+
+            columnNumber++;
+            xVal += 10f;
+
+            if (i == 4 || i == 9 || i == 14 || i == 19)
+            {
+                //Reseting variables for next line
+                columnLetter = Convert.ToChar((Convert.ToUInt16(columnLetter) + 1));
+                columnNumber = 1;
+                zVal -= 10f;
+                xVal = 0;
+            }
+        }
+    }
+
+
+
+
+
+
 
 
 
