@@ -679,6 +679,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 580873372}
         m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
+        m_MethodName: StoreWhichButton
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 255375462}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 580873372}
+        m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
         m_MethodName: BeginPlaceShip
         m_Mode: 2
         m_Arguments:
@@ -1006,6 +1018,7 @@ MonoBehaviour:
   buildingPanel: {fileID: 277260725}
   editingPanel: {fileID: 604047092}
   arrowPanel: {fileID: 896333524}
+  currentButton: {fileID: 0}
   currentShip: {fileID: 0}
   previousPos: {fileID: 0}
 --- !u!1 &604047092
@@ -2827,6 +2840,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 580873372}
         m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
+        m_MethodName: StoreWhichButton
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1664672413}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 580873372}
+        m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
         m_MethodName: BeginPlaceShip
         m_Mode: 2
         m_Arguments:
@@ -3277,6 +3302,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 580873372}
+        m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
+        m_MethodName: StoreWhichButton
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1880858312}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 580873372}
         m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
         m_MethodName: BeginPlaceShip
@@ -4489,6 +4526,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 580873372}
         m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
+        m_MethodName: StoreWhichButton
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2098347286}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 580873372}
+        m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
         m_MethodName: BeginPlaceShip
         m_Mode: 2
         m_Arguments:
@@ -4620,6 +4669,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 580873372}
+        m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
+        m_MethodName: StoreWhichButton
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2107985299}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 580873372}
         m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
         m_MethodName: BeginPlaceShip

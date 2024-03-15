@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class BuildingSystem : MonoBehaviour
 {
@@ -23,6 +21,9 @@ public class BuildingSystem : MonoBehaviour
     public GameObject buildingPanel;
     public GameObject editingPanel;
     public GameObject arrowPanel;
+    public GameObject currentButton;
+
+    private int currentShipPlaced = 0;
 
     public GameObject currentShip;
     public Transform previousPos;
@@ -83,6 +84,10 @@ public class BuildingSystem : MonoBehaviour
         buildingPanel.SetActive(true);
         editingPanel.SetActive(false);
         arrowPanel.SetActive(false);
+
+        //Removing ship from UI and telling game its been placed
+        currentButton.SetActive(false);
+        currentShipPlaced++;
     }
     public void RotatePlaceShip()
     {
@@ -97,7 +102,12 @@ public class BuildingSystem : MonoBehaviour
 
         arrowPanel.SetActive(false);
     }
-
+    
+    //Storing a button variable to disable a choice
+    public void StoreWhichButton(GameObject button)
+    {
+        currentButton = button;
+    }
 
     //Arrow Method
     public void MoveLeft()
@@ -216,7 +226,13 @@ public class BuildingSystem : MonoBehaviour
         return shipName;
     }
 
-
+    private void Update()
+    {
+        if(currentShipPlaced == 5)
+        {
+            Debug.Log("Building Over");
+        }
+    }
 
 
 
