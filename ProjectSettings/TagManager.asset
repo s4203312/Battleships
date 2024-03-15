@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - TileSpace
+  - PrefabTilePoint
   layers:
   - Default
   - TransparentFX

@@ -30,8 +30,8 @@ public class BuildingSystem : MonoBehaviour
 
     //Saving ship pos variables
     public Dictionary<string, Vector3> allTiles = new Dictionary<string, Vector3>();
-    public Vector3[] shipTiles;
-    public Dictionary<string, Vector3[]> allShipPos;
+    List<Vector3> shipTiles = new List<Vector3>();
+    public Dictionary<string, List<Vector3>> allShipPos = new Dictionary<string, List<Vector3>>();
 
 
     private void Awake()
@@ -62,6 +62,19 @@ public class BuildingSystem : MonoBehaviour
             objectToPlace.Place();
             Vector3Int start = gridLayout.WorldToCell(objectToPlace.GetStartPosition());
             TakeArea(start, objectToPlace.Size);
+
+            //Saving pos to dictionary
+            string shipName = RecordPlayerShipPos(objectToPlace.gameObject);
+            //foreach (var item in shipTiles)
+            //{
+            //    Debug.Log(item);
+            //}
+
+            allShipPos.Add(shipName, shipTiles);
+            //foreach (var item in allShipPos)
+            //{
+            //    Debug.Log("Key " + item.Key + " Value " + item.Value);
+            //}
         }
         else
         {
@@ -87,7 +100,6 @@ public class BuildingSystem : MonoBehaviour
 
 
     //Arrow Method
-
     public void MoveLeft()
     {
         int counter = BoundsCheck(1);
@@ -189,7 +201,20 @@ public class BuildingSystem : MonoBehaviour
         }
     }
 
+    public string RecordPlayerShipPos(GameObject currentShip)
+    {
+        Transform ship = currentShip.transform;
 
+        for (int i = 0; i < ship.childCount; i++)
+        {
+            if (ship.GetChild(i).gameObject.tag == "PrefabTilePoint")
+            {
+                shipTiles.Add(ship.GetChild(i).transform.position);
+            }
+        }
+        string shipName = currentShip.gameObject.name.Replace("Prefab(Clone)", "");
+        return shipName;
+    }
 
 
 
