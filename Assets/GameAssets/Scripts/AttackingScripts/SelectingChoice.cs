@@ -6,7 +6,11 @@ using UnityEngine.UI;
 
 public class SelectingChoice : MonoBehaviour
 {
-    public string[] player1ShipPositions = {"A1", "A2", "A3"};
+    public static BuildingSystem buildingScript;
+
+    [HideInInspector] public Dictionary<string, Vector3> allTiles = new Dictionary<string, Vector3>();
+    [HideInInspector] public Dictionary<string, List<Vector3>> playerShipPos = new Dictionary<string, List<Vector3>>();
+    public string[] player1ShipPositions;
     public string[] player2ShipPositions = {"B1", "B2", "B3"};
 
     public GameObject inputFeild;
@@ -14,6 +18,18 @@ public class SelectingChoice : MonoBehaviour
 
     public bool isplayer1 = true;
     public bool hasHit;
+
+    private Vector3 guessPos;
+
+    public GameObject hit;
+    public GameObject miss;
+
+    void Awake()
+    {
+        buildingScript = this.GetComponent<BuildingSystem>();
+        allTiles = buildingScript.allTiles;
+        playerShipPos = buildingScript.allShipPos;
+    }
 
     public void Update()
     {
@@ -32,17 +48,24 @@ public class SelectingChoice : MonoBehaviour
     {
         if (isplayer1)
         {
-            foreach (var ship in player1ShipPositions)
+            allTiles.TryGetValue(inputFeild.GetComponent<TMP_InputField>().text, out guessPos);
+            foreach (var ship in playerShipPos)
             {
-                if (inputFeild.GetComponent<TMP_InputField>().text == ship)
+                foreach (var shipPos in ship.Value)
                 {
-                    Debug.Log("Hit1");
-                    hasHit = true;
+                    if (guessPos == shipPos)
+                    {
+                        Debug.Log("Hit" + ship.Key + guessPos);
+                        Instantiate(hit, guessPos + new Vector3(5, 10, 5), Quaternion.identity);
+                        hasHit = true;
+                    }
                 }
             }
+
             if (!hasHit)
             {
-                Debug.Log("Miss1");
+                Debug.Log("Miss");
+                Instantiate(miss, guessPos + new Vector3(5, 10, 5), Quaternion.identity);
             }
 
 
