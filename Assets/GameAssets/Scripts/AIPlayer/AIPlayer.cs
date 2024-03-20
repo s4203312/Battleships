@@ -6,26 +6,31 @@ using UnityEngine;
 
 public class AIPlayer : MonoBehaviour
 {
+    public static BuildingSystem buildingScript;
     public static SelectingChoice playerchoiceScript;
     public GameObject refGameObject;
 
-    private string[] allTiles = { "A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3" };
     private string[] neighbourTiles;
 
-    private string[] playersShipsPos = { "A1", "A2", "A3" };
+    [HideInInspector] public Dictionary<string, Vector3> allTiles = new Dictionary<string, Vector3>();
+    [HideInInspector] public Dictionary<string, List<Vector3>> playerShipPos = new Dictionary<string, List<Vector3>>();
+
     private bool randomPick = true;
 
 
     void Awake()
     {
         playerchoiceScript = refGameObject.GetComponent<SelectingChoice>();
+        buildingScript = this.GetComponent<BuildingSystem>();
+        allTiles = buildingScript.allTiles;
+        playerShipPos = buildingScript.allShipPos;
     }
 
     public void MakeDecision()
     {
         if (randomPick)
         {
-            int posPick = UnityEngine.Random.Range(0, allTiles.Length);
+            int posPick = UnityEngine.Random.Range(0, allTiles.Count);
             string tilePicked = allTiles[posPick];
             Debug.Log(tilePicked);
             foreach (string shipPos in playersShipsPos) 

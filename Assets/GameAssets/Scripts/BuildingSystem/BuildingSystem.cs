@@ -69,10 +69,10 @@ public class BuildingSystem : MonoBehaviour
             allShipPos.Add(shipName, shipTiles);
             foreach (var item in allShipPos)
             {
-                //Debug.Log("Key " + item.Key);
+                Debug.Log("Key " + item.Key);
                 foreach (var item2 in item.Value)
                 {
-                    //Debug.Log("Value " + item2);
+                    Debug.Log("Value " + item2);
                 }
             }
 
