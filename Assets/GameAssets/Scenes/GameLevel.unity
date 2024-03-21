@@ -7252,7 +7252,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 52.5}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &896333526
@@ -8250,8 +8250,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 277260726}
-  - {fileID: 604047093}
   - {fileID: 896333525}
+  - {fileID: 604047093}
   - {fileID: 1877149454}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17155,8 +17155,6 @@ MonoBehaviour:
   - B2
   - B3
   inputFeild: {fileID: 495195325}
-  whosTurn: {fileID: 819308957}
-  isplayer1: 1
   hasHit: 0
   hit: {fileID: 8146424033832032904, guid: 0782d90e924fc544caa21885336c405b, type: 3}
   miss: {fileID: 8146424033832032904, guid: 034e0b329c85462409db2d66c49419a1, type: 3}
@@ -17173,6 +17171,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   refGameObject: {fileID: 1795837817}
+  hasHit: 0
+  hit: {fileID: 8146424033832032904, guid: 0782d90e924fc544caa21885336c405b, type: 3}
+  miss: {fileID: 8146424033832032904, guid: 034e0b329c85462409db2d66c49419a1, type: 3}
 --- !u!114 &1795837824
 MonoBehaviour:
   m_ObjectHideFlags: 0

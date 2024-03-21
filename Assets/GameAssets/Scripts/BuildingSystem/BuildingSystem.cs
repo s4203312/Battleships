@@ -55,7 +55,8 @@ public class BuildingSystem : MonoBehaviour
     {
         if (CheckPlayerShipPos())
         {
-            shipTiles.Clear();
+            //Reseting the list and string for new entry
+            shipTiles = new List<Vector3>();
             shipName = "";
 
             //Saving pos to dictionary

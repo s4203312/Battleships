@@ -8,7 +8,13 @@ public class PlaceableObject : MonoBehaviour
     public void Rotate()
     {
         transform.Rotate(new Vector3(0, 90, 0));
-        Debug.Log("Rotation not working with current build");
-        //Could rotate just the child points seperately by 90 then back to 0 for every other rotation???
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (transform.GetChild(i).gameObject.tag == "PrefabTilePoint")
+            {
+                transform.GetChild(i).transform.position -= new Vector3(0,0,10);
+            }
+        }
     }
 }
