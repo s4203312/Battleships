@@ -253,6 +253,7 @@ public class BuildingSystem : MonoBehaviour
     {
         if(currentShipPlaced == 5)
         {
+            buildingPanel.SetActive(false);
             managerScript.AttackMode();
             currentShipPlaced = 0;
         }

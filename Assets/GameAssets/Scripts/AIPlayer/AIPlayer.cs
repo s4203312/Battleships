@@ -28,6 +28,7 @@ public class AIPlayer : MonoBehaviour
 
     public GameObject hit;
     public GameObject miss;
+    public GameObject missile;
 
     void Awake()
     {
@@ -181,6 +182,7 @@ public class AIPlayer : MonoBehaviour
                 {
                     Debug.Log("Hit" + ship.Key + guessPos);
                     Instantiate(hit, guessPos + new Vector3(5, 10, 5), Quaternion.identity);
+                    Instantiate(missile, guessPos + new Vector3(5, 100, 5), Quaternion.identity);
                     hasHit = true;
                     randomPick = false;
                     lastHit = AIGuess;
